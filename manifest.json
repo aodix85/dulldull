@@ -1,0 +1,21 @@
+{
+  "name": "Secure Exam Text Editor",
+  "short_name": "ExamEditor",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'><rect width='192' height='192' fill='%23252526'/><text x='50%' y='55%' font-family='monospace' font-size='90' fill='%230e639c' dominant-baseline='middle' text-anchor='middle'>TXT</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><rect width='512' height='512' fill='%23252526'/><text x='50%' y='55%' font-family='monospace' font-size='240' fill='%230e639c' dominant-baseline='middle' text-anchor='middle'>TXT</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
