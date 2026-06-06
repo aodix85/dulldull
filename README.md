@@ -13,6 +13,7 @@ DullDull is intended to be self-hosted and was done so using the following
 
 Within NPM, the scheme used was **http**, and the **Block Common Assets** and **Websockets support** options were turned on though these should not be required.  Regarding SSL options in NPM, a wildcard certificate was used for testing and the **Force SSL**, **HTTP/2 Support**, and **HSTS Enabled** options were turned on, though these may not be required.  HTTPS setup and SSL certificates are a subject entirely on their own and outside of the scope of this project, but HTTPS does need to be used for full functionality.
 
-**NOTE: Service workers only run over HTTPS, so a local dev environment using HTTP is safe. But production must enforce HTTPS to prevent MITM attacks, period.  If used in production this must ONLY be run over HTTPS**
+**NOTE: Service workers only run over HTTPS, so a local dev environment using HTTP is safe but production must enforce HTTPS to prevent MITM attacks, period.  If used in production this must ONLY be run over HTTPS**
 
-ADDITIONAL NOTE: In order for all features to function as intended such as the battery level widget, this must be served on an encrytped site using HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.  
+Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
+
