@@ -1,7 +1,7 @@
 # dulldull
 A self-hostable replacement webpage for the ShinyShiny app which is expected to be disallowed after v138/v150 of ChromeOS on Chromebooks.  It's a very very simple text editor where results can be saved or printed, and nothing more.  
 
-**Please note, this was vibe-coded with Gemini.  Apologies if that offends anyone.  Please fork and improve it!**
+**Please note, this was vibe-coded with Gemini and was checked and improved with ChatGPT.  Apologies if that offends anyone.  Please fork and improve it!  I will include those chat logs so that you can look to see what was asked and how it was answered.  I have preserved these chats to the best of my ability but something might be missing.**
 
 DullDull is intended to be self-hosted and was done so using the following
 - Proxmox v9.2.2
