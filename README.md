@@ -33,9 +33,8 @@ This is a very simple static webpage and can be deployed like any other webpage 
 - Create a folder for your website on Ubuntu using **sudo mkdir -p /var/www/mywebsite.com**
 - Create and edit your custom Nginx server configuration file with **sudo nano /etc/nginx/sites-available/mywebsite.com** replacing *mywebsite.com* with your website name
 - Paste the following basic configuration, adjusting the server_name to your domain or IP address:
-  > Nginx Configuration File
-  > 
-    
+> Nginx Configuration File
+
     server {
       listen 80;
       listen [::]:80;
