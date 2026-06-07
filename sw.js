@@ -1,4 +1,4 @@
-const CACHE_NAME = 'exam-editor-v1';
+const CACHE_NAME = 'exam-editor-v2';
 const ASSETS = [
   'index.html',
   'manifest.json'
@@ -13,7 +13,7 @@ self.addEventListener('install', event => {
   );
 });
 
-// Clean Old Cache Instances
+// Purge outmoded static assets safely
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
@@ -28,7 +28,7 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Network Intercept / Offline Execution Pipeline
+// Serve assets from local sandbox context if internet drops out
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
