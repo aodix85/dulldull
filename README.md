@@ -11,11 +11,11 @@ DullDull is intended to be self-hosted and was done so using the following:
 - Nginx v1.28.3 (required)
 - Nginx Proxy Manager used in a separate container for reverse proxy, HTTPS, and SSL certificate management
 
-  > **Note:** Within NPM, the scheme used was **http**, and the **Block Common Assets** and **Websockets support** options were turned on though these should not be required.  Regarding SSL options in NPM, a wildcard certificate was used for testing and the **Force SSL**, **HTTP/2 Support**, and **HSTS Enabled** options were turned on, though these may not be required.  HTTPS setup and SSL certificates are a subject entirely on their own and outside of the scope of this project, but HTTPS does need to be used for full functionality.
+  > **NOTE:** Within NPM, the scheme used was **http**, and the **Block Common Assets** and **Websockets support** options were turned on though these should not be required.  Regarding SSL options in NPM, a wildcard certificate was used for testing and the **Force SSL**, **HTTP/2 Support**, and **HSTS Enabled** options were turned on, though these may not be required.  HTTPS setup and SSL certificates are a subject entirely on their own and outside of the scope of this project, but HTTPS does need to be used for full functionality.
 
   > **NOTE: Service workers only run over HTTPS, so a local dev environment using HTTP is safe but production must enforce HTTPS to prevent MITM attacks, period.  If used in production this must ONLY be run over HTTPS**
 
-  > **Note:** Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
+  > **NOTE:** Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
 
 Because of the huge number of variations available for reverse proxies, webservers, certificate management options, etc., I will go over a super simple deployment.  This shouldn't be considered the only way or even the best way to deploy this, it is simply one way and the way that I chose to deploy it because it suits my use case and the test environment available to me.  As always, YMMV.
 
@@ -50,15 +50,16 @@ This is a very simple static webpage and can be deployed like any other webpage 
 
 - Enable the new site by creating a symlink to the sites-enabled directory using **ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing *mywebsite.com* with your website name
 - Remove the softlink to the default Nginx webpage using **rm /etc/nginx/sites-enabled/default**
-   > **Note:** If you see the default Nginx webserver page then you have likely skipped this step
+   > **NOTE:** If you see the default Nginx webserver page then you have likely skipped this step
 - Test the configuration for any syntax errors and reload Nginx using **nginx -t && systemctl reload nginx**
 - Copy the website files from this repository to the */var/www/mywebsite.com* directory in Ubuntu
-   > **Note:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **nano /var/www/mywebsite.com/index.html** to create a new file called *index.html* within the */var/www/mywebsite.com* directory and can copy and paste the contents if the index file in to it, and you can do the same for sw.js and manifest.json, but note that as the .png and .ttf files are not text files you will not be able to create a blank file and add those contents that way.
+   > **NOTE:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **nano /var/www/mywebsite.com/index.html** to create a new file called *index.html* within the */var/www/mywebsite.com* directory and can copy and paste the contents if the index file in to it, and you can do the same for sw.js and manifest.json, but note that as the .png and .ttf files are not text files you will not be able to create a blank file and add those contents that way.
 
 From here, any changes that you need to make should be followed by the command **nginx -t && systemctl reload nginx** and you should reboot occasionally to ensure that your changes will survive reboot and that the webserver will come up on reboot.  
 
 TTF files can be found at [Google Fonts](https://fonts.google.com/) but if you change the fonts, make sure that you have updated the index.html file accordingly.  
 
+**_NOTE: I will mention this one last time in case you did not already read this above, you MUST use HTTPS to host this site or it will NOT be a secure way to use it and could be vulnerable to an AITM attack! Test results MUST be considered invalid if this is hosted on a non-HTTPS site.  I do not take ANY responsibility for the misuse of this PWA in any way._**
 
 
 **Other license information:**
