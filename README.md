@@ -17,6 +17,8 @@ DullDull is intended to be self-hosted and was done so using the following:
 
   > Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
 
+Because of the huge number of variations available for reverse proxies, webservers, certificate management options, etc., I will go over a super simple deployment.  This shouldn't be considered the only way or even the best way to deploy this, it is simply one way and the way that I chose to deploy it because it suits my use case and the test environment available to me.  As always, YMMV.
+
 # Installation:
 
 This is a very simple static webpage and can be deployed like any other webpage in Nginx or another webserver.  I will not get in to the millions of variations but will explain briefly a simple installation.
