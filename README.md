@@ -21,7 +21,7 @@ Because of the huge number of variations available for reverse proxies, webserve
 
 # Installation:
 
-This is a very simple static webpage and can be deployed like any other webpage in Nginx or another webserver.  I will not get in to the millions of variations but will explain briefly a simple installation:
+This is a very simple static webpage and can be deployed like any other webpage with Nginx or another webserver.  I will not get in to the thousands of variations but will explain briefly a simple installation:
 
 - Create a Linux container or virtual machine or physical machine and install Ubuntu Linux
 - Once installed, update using **sudo apt update && sudo apt upgrade -y** from the terminal or by SSH'ing into the server
