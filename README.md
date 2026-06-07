@@ -25,12 +25,13 @@ This is a very simple static webpage and can be deployed like any other webpage 
 
 - Create a Linux container or virtual machine or physical machine and install Ubuntu Linux
 - Once installed, update using **sudo apt update && sudo apt upgrade -y** from the terminal or by SSH'ing into the server
+   > **NOTE:** Some Linux distributions will not require the use of the **sudo** command in each of these steps and if you are logged in as *root* you will not need to use **sudo** either
 - Install Cockpit (optional, recommended) and Nginx (required) by running **sudo apt install cockpit nginx -y**
 - Start and enable Cockpit to run on startup using **sudo systemctl start cockpit && sudo systemctl enable cockpit**
 - Open Cockpit by going to **http://YOUR_IP_ADDRESS_HERE:9090** and login
 - You may also want to install [Cockpit Navigator](https://github.com/45Drives/cockpit-navigator) from the [45Drives](https://github.com/45Drives) repository using the instructions for Ubuntu as that will make adding files much easier
-- Create a folder for your website on Ubuntu using **mkdir -p /var/www/mywebsite.com**
-- Create and edit your custom Nginx server configuration file with **nano /etc/nginx/sites-available/mywebsite.com** replacing *mywebsite.com* with your website name
+- Create a folder for your website on Ubuntu using **sudo mkdir -p /var/www/mywebsite.com**
+- Create and edit your custom Nginx server configuration file with **sudo nano /etc/nginx/sites-available/mywebsite.com** replacing *mywebsite.com* with your website name
 - Paste the following basic configuration, adjusting the server_name to your domain or IP address:
 > Nginx Configuration File
 > 
@@ -48,14 +49,14 @@ This is a very simple static webpage and can be deployed like any other webpage 
       }
     }
 
-- Enable the new site by creating a symlink to the sites-enabled directory using **ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing *mywebsite.com* with your website name
-- Remove the softlink to the default Nginx webpage using **rm /etc/nginx/sites-enabled/default**
+- Enable the new site by creating a symlink to the sites-enabled directory using **sudo ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing *mywebsite.com* with your website name
+- Remove the softlink to the default Nginx webpage using **sudo rm /etc/nginx/sites-enabled/default**
    > **NOTE:** If you see the default Nginx webserver page then you have likely skipped this step
-- Test the configuration for any syntax errors and reload Nginx using **nginx -t && systemctl reload nginx**
+- Test the configuration for any syntax errors and reload Nginx using **sudo nginx -t && systemctl reload nginx**
 - Copy the website files from this repository to the */var/www/mywebsite.com* directory in Ubuntu
-   > **NOTE:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **nano /var/www/mywebsite.com/index.html** to create a new file called *index.html* within the */var/www/mywebsite.com* directory and can copy and paste the contents of the index file into it, and you can do the same for sw.js and manifest.json, but note that as the .png and .ttf files are not text-based files you will not be able to create a blank file and add those contents that way. I recommend using Cockpit Navigator with Cockpit specifically for this reason and for simple site management.
+   > **NOTE:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **sudo nano /var/www/mywebsite.com/index.html** to create a new file called *index.html* within the */var/www/mywebsite.com* directory and can copy and paste the contents of the index file into it, and you can do the same for sw.js and manifest.json, but note that as the .png and .ttf files are not text-based files you will not be able to create a blank file and add those contents that way. I recommend using Cockpit Navigator with Cockpit specifically for this reason and for simple site management.
 
-From here, any changes that you need to make should be followed by the command **nginx -t && systemctl reload nginx** and you should reboot occasionally to ensure that your changes will survive reboot and that the webserver will come up on reboot.  
+From here, any changes that you need to make should be followed by the command **sudo nginx -t && systemctl reload nginx** and you should reboot occasionally to ensure that your changes will survive reboot and that the webserver will come up on reboot.  
 
 TTF files can be found at [Google Fonts](https://fonts.google.com/) but if you change the fonts, make sure that you have updated the index.html file accordingly.  
 
