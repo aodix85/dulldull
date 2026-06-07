@@ -1,7 +1,9 @@
 const CACHE_NAME = 'exam-editor-v2';
 const ASSETS = [
   'index.html',
-  'manifest.json'
+  'manifest.json',
+  'fira-mono.ttf',
+  'roboto-slab.ttf'
 ];
 
 // Initialize and Cache Engine Assets
