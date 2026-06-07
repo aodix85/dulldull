@@ -3,18 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DullDull Secure Exam Editor</title>
+    <title>Dull Dull Secure Exam Editor</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e1e1e" id="theme-meta">
+
+    <meta http-equiv="Content-Security-Policy"
+          content="
+            default-src 'self';
+            script-src 'self' 'unsafe-inline';
+            style-src 'self' 'unsafe-inline';
+            img-src 'self' data:;
+            manifest-src 'self';
+            connect-src 'self';
+            worker-src 'self';
+            object-src 'none';
+            base-uri 'none';
+            frame-ancestors 'none';
+            form-action 'none';
+            upgrade-insecure-requests;
+            block-all-mixed-content;
+          ">
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* CSS Variables to handle instant theme-switching */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
             --bg-main: #1e1e1e;
             --bg-bar: #252526;
@@ -25,154 +37,26 @@
             --btn-hover: #1177bb;
             --control-txt: #ffffff;
         }
-
-        .light-theme {
-            --bg-main: #ffffff;
-            --bg-bar: #f3f3f3;
-            --border-color: #cecece;
-            --text-main: #000000;
-            --text-muted: #616161;
-            --btn-bg: #007acc;
-            --btn-hover: #0062a3;
-            --control-txt: #333333;
+        .light-theme { 
+            --bg-main: #ffffff; --bg-bar: #f3f3f3; --border-color: #cecece; 
+            --text-main: #000000; --text-muted: #616161; 
+            --btn-bg: #007acc; --btn-hover: #0062a3; --control-txt: #333333;
         }
-
-        body, html {
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
-            transition: background-color 0.15s, color 0.15s;
-        }
-
-        #editor-container {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        #control-bar {
-            background-color: var(--bg-bar);
-            padding: 8px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            user-select: none;
-        }
-
-        .left-controls, .right-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .status-text {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .btn {
-            background-color: var(--btn-bg);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 13px;
-            border-radius: 2px;
-        }
-        .btn:hover {
-            background-color: var(--btn-hover);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--control-txt);
-        }
-        .btn-secondary:hover {
-            background-color: var(--border-color);
-        }
-
-        select {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 5px;
-            font-family: inherit;
-            font-size: 13px;
-            outline: none;
-            border-radius: 2px;
-        }
-
-        #editor {
-            flex: 1;
-            width: 100%;
-            padding: 25px;
-            border: none;
-            resize: none;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px; /* Default */
-            line-height: 1.6;
-            outline: none;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            transition: background-color 0.15s, color 0.15s;
-        }
-
-        #info-overlay {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: var(--bg-bar);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            z-index: 1000;
-            min-width: 320px;
-        }
-        #info-overlay h3 {
-            margin-bottom: 10px;
-            color: var(--control-txt);
-            font-size: 15px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-        #info-overlay p {
-            font-size: 14px;
-            margin: 8px 0;
-            color: var(--text-main);
-        }
-
-        /* Print Media Stylesheet Overrides */
-        @media print {
-            #control-bar {
-                display: none !important;
-            }
-            #editor {
-                color: #000000 !important;
-                background-color: #ffffff !important;
-                font-size: 12pt !important;
-                overflow: visible !important;
-                height: auto !important;
-            }
-            body, html {
-                background-color: #ffffff !important;
-                color: #000000 !important;
-                overflow: visible !important;
-                height: auto !important;
-            }
-        }
+        body, html { width: 100%; height: 100%; background-color: var(--bg-main); color: var(--text-main); font-family: 'Courier New', Courier, monospace; overflow: hidden; transition: background-color 0.15s, color 0.15s; }
+        #editor-container { display: flex; flex-direction: column; width: 100%; height: 100%; position: relative; }
+        #control-bar { background-color: var(--bg-bar); padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); user-select: none; }
+        .left-controls, .right-controls { display: flex; align-items: center; gap: 12px; }
+        .status-text { font-size: 13px; color: var(--text-muted); }
+        .btn { background-color: var(--btn-bg); color: white; border: none; padding: 6px 12px; cursor: pointer; font-family: inherit; font-size: 13px; border-radius: 2px; }
+        .btn:hover { background-color: var(--btn-hover); }
+        .btn-secondary { background-color: transparent; border: 1px solid var(--border-color); color: var(--control-txt); }
+        .btn-secondary:hover { background-color: var(--border-color); }
+        select { background-color: var(--bg-main); color: var(--text-main); border: 1px solid var(--border-color); padding: 5px; font-family: inherit; font-size: 13px; outline: none; border-radius: 2px; }
+        #editor { flex: 1; width: 100%; padding: 25px; border: none; resize: none; background-color: var(--bg-main); color: var(--text-main); font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 1.6; outline: none; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word; transition: background-color 0.15s, color 0.15s; }
+        #info-overlay { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--bg-bar); border: 1px solid var(--border-color); padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; min-width: 320px; }
+        #info-overlay h3 { margin-bottom: 10px; color: var(--control-txt); font-size: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        #info-overlay p { font-size: 14px; margin: 8px 0; color: var(--text-main); }
+        @media print { #control-bar { display: none !important; } #editor { color: #000000 !important; background-color: #ffffff !important; font-size: 12pt !important; overflow: visible !important; height: auto !important; } body, html { background-color: #ffffff !important; color: #000000 !important; overflow: visible !important; height: auto !important; } }
     </style>
 </head>
 <body>
@@ -182,33 +66,25 @@
         <div class="left-controls">
             <button class="btn" id="save-btn">Save As...</button>
             <button class="btn btn-secondary" id="print-btn">Print</button>
-            
             <select id="font-size-select" title="Font Size">
                 <option value="14px">Small Text</option>
                 <option value="16px" selected>Normal Text</option>
                 <option value="20px">Large Text</option>
                 <option value="24px">Extra Large</option>
             </select>
-
             <select id="font-family-select" title="Font Style">
                 <option value="'Courier New', Courier, monospace" selected>Monospace</option>
                 <option value="Arial, Helvetica, sans-serif">Sans-Serif (Plain)</option>
                 <option value="'Times New Roman', Times, serif">Serif</option>
             </select>
         </div>
-        
         <div class="right-controls">
             <div class="status-text" id="battery-display">Battery: --</div>
             <button class="btn btn-secondary" id="theme-toggle">Toggle Theme</button>
         </div>
     </div>
     
-    <textarea id="editor" 
-              spellcheck="false" 
-              autocorrect="off" 
-              autocapitalize="none" 
-              autocomplete="off" 
-              placeholder="Begin typing your exam responses here..."></textarea>
+    <textarea id="editor" spellcheck="false" autocorrect="off" autocapitalize="none" autocomplete="off" placeholder="Begin typing your exam responses here..."></textarea>
 </div>
 
 <div id="info-overlay">
@@ -232,7 +108,6 @@
     // --- Native File System Access Engine (Save Dialog) ---
     async function saveDocumentWithDialog() {
         const textContent = editor.value;
-        
         const options = {
             suggestedName: 'Exam_Submission.txt',
             types: [{
@@ -240,17 +115,33 @@
                 accept: { 'text/plain': ['.txt'] }
             }]
         };
-
         try {
-            // Spawns native OS Save Dialog Box
             const handle = await window.showSaveFilePicker(options);
             const writable = await handle.createWritable();
             await writable.write(textContent);
             await writable.close();
+            // Data remains completely untouched inside sessionStorage here to preserve screen text
         } catch (err) {
-            // Catches user cancellations or security exceptions gracefully
-            console.warn('Save operations modified or aborted by user:', err);
+            console.warn('Save operation cancelled or blocked:', err);
         }
+    }
+
+    // --- Session Resiliency Engine ---
+    // Restore text automatically if the page reloaded or crashed
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedBackup = sessionStorage.getItem('exam_session_backup');
+        if (savedBackup) {
+            editor.value = savedBackup;
+            updateStats();
+        }
+    });
+
+    // Quietly update the session memory bucket on every keystroke
+    function updateStatsAndBackup() {
+        const text = editor.value;
+        document.getElementById('char-count').textContent = text.length;
+        document.getElementById('line-count').textContent = text.split('\n').length;
+        sessionStorage.setItem('exam_session_backup', text);
     }
 
     // --- Battery Monitoring Pipeline ---
@@ -261,48 +152,40 @@
                 const status = battery.charging ? '🔌 Charging' : '🔋 Discharging';
                 batteryDisplay.textContent = `Battery: ${level}% (${status})`;
             }
-            
             updateBatteryStatus();
-            // Attach hardware state changes listeners
             battery.addEventListener('levelchange', updateBatteryStatus);
             battery.addEventListener('chargingchange', updateBatteryStatus);
         });
     } else {
-        batteryDisplay.style.display = 'none'; // Clear if target machine lacks battery profile
+        batteryDisplay.style.display = 'none';
     }
 
-    // --- Formatting Alteration Mechanics ---
-    fontSizeSelect.addEventListener('change', (e) => {
-        editor.style.fontSize = e.target.value;
-    });
+    // --- Editor Formatting Controls ---
+    fontSizeSelect.addEventListener('change', (e) => editor.style.fontSize = e.target.value);
+    fontFamilySelect.addEventListener('change', (e) => editor.style.fontFamily = e.target.value);
 
-    fontFamilySelect.addEventListener('change', (e) => {
-        editor.style.fontFamily = e.target.value;
-    });
-
-    // --- Theme Switching Toggles ---
+    // --- Theme Switching ---
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('light-theme');
         const isLight = document.body.classList.contains('light-theme');
         themeMeta.setAttribute('content', isLight ? '#f3f3f3' : '#1e1e1e');
     });
 
-    // --- Native Print Engine Binding ---
-    printBtn.addEventListener('click', () => {
-        window.print();
-    });
+    // --- Print Execution ---
+    printBtn.addEventListener('click', () => window.print());
 
-    // --- Document Metrics Engine ---
+    // --- Event Bindings ---
+    saveBtn.addEventListener('click', saveDocumentWithDialog);
+    editor.addEventListener('input', updateStatsAndBackup);
+
+    // Legacy fallback stat calculation helper
     function updateStats() {
         const text = editor.value;
         document.getElementById('char-count').textContent = text.length;
         document.getElementById('line-count').textContent = text.split('\n').length;
     }
 
-    saveBtn.addEventListener('click', saveDocumentWithDialog);
-    editor.addEventListener('input', updateStats);
-
-    // --- Global Hotkey Intercept Layer ---
+    // --- Global Hotkey Intercepts ---
     window.addEventListener('keydown', function(e) {
         if ((e.ctrlKey || e.metaKey) && e.key === 's') {
             e.preventDefault();
@@ -319,10 +202,11 @@
         }
     });
 
-    // Register Service Worker
+    // --- Service Worker Initialization ---
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
+            navigator.serviceWorker.register('sw.js', { scope: './' })
+                .catch(err => console.error('Service Worker registration failed:', err));
         });
     }
 </script>
