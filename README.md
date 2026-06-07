@@ -48,10 +48,10 @@ This is a very simple static webpage and can be deployed like any other webpage 
 
 - Enable the new site by creating a symlink to the sites-enabled directory using **ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing *mywebsite.com* with your website name
 - Remove the softlink to the default Nginx webpage using **rm /etc/nginx/sites-enabled/default**
-- > **Note:** If you see teh default Nginx webserver page then you have likely skipped this step
+   > **Note:** If you see the default Nginx webserver page then you have likely skipped this step
 - Test the configuration for any syntax errors and reload Nginx using **nginx -t && systemctl reload nginx**
 - Copy the website files from this repository to the */var/www/mywebsite.com* directory in Ubuntu
-> **Note:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **nano index.html** from within the 
+   > **Note:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **nano index.html** from within the 
 
 
 
