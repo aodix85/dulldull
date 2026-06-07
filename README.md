@@ -25,7 +25,7 @@ This is a very simple static webpage and can be deployed like any other webpage 
 
 - Create a Linux container or virtual machine or physical machine and install Ubuntu Linux
 - Once installed, update using **sudo apt update && sudo apt upgrade -y** from the terminal or by SSH'ing into the server
-   > **NOTE:** Some Linux distributions will not require the use of the **sudo** command in each of these steps and if you are logged in as *root* you will not need to use **sudo** either
+   > **NOTE:** Some Linux distributions or configurations will not require the use of the **sudo** command nor is it required if logged in as the *root* user
 - Install Cockpit (optional, recommended) and Nginx (required) by running **sudo apt install cockpit nginx -y**
 - Start and enable Cockpit to run on startup using **sudo systemctl start cockpit && sudo systemctl enable cockpit**
 - Open Cockpit by going to **http://YOUR_IP_ADDRESS_HERE:9090** and login
