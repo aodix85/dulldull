@@ -17,6 +17,6 @@ Within NPM, the scheme used was **http**, and the **Block Common Assets** and **
 
 Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
 
-Roboto Slab Typeface is licensed under the Apache License, Version 2.0. Copyright Google Inc.
-
-Fira Mono Typeface is licensed under the SIL Open Font License, Version 1.1. Copyright Carrois Corporate Design & Edenspiekermann.
+**Other license information**
+-Roboto Slab Typeface is licensed under the Apache License, Version 2.0. Copyright Google Inc.
+-Fira Mono Typeface is licensed under the SIL Open Font License, Version 1.1. Copyright Carrois Corporate Design & Edenspiekermann.
