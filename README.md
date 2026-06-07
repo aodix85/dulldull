@@ -28,7 +28,7 @@ This is a very simple static webpage and can be deployed like any other webpage 
 - Open Cockpit by going to **http://YOUR_IP_ADDRESS_HERE:9090** and login
 - You may also want to install [Cockpit Navigator](https://github.com/45Drives/cockpit-navigator) from the [45Drives](https://github.com/45Drives) repository using the instructions for Ubuntu as that will make adding files much easier
 - Create a folder for your website on Ubuntu using **mkdir -p /var/www/mywebsite.com**
-- Create and edit your custom Nginx server configuration file with **nano /etc/nginx/sites-available/mywebsite.com** replacing mywebsite.com with your website name
+- Create and edit your custom Nginx server configuration file with **nano /etc/nginx/sites-available/mywebsite.com** replacing *mywebsite.com* with your website name
 - Paste the following basic configuration, adjusting the server_name to your domain or IP address:
 > Nginx Configuration File
 > 
@@ -36,7 +36,7 @@ This is a very simple static webpage and can be deployed like any other webpage 
       listen 80;
       listen [::]:80;
 
-      server_name mywebsite.com 123:456:789:123; # Replacemywebsite.com with your domain and replace 123:456:789:123 with your local IP address
+      server_name mywebsite.com 123:456:789:123; # Replace mywebsite.com with your domain and replace 123:456:789:123 with your local IP address
 
       root /var/www/mywebsite.com; # Replacing mywebsite.com with your website name
       index index.html;
@@ -46,7 +46,13 @@ This is a very simple static webpage and can be deployed like any other webpage 
       }
     }
 
-- Enable the new site by creating a symlink to the sites-enabled directory using **ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing mywebsite.com with your website name
+- Enable the new site by creating a symlink to the sites-enabled directory using **ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing *mywebsite.com* with your website name
+- Remove the softlink to the default Nginx webpage using **rm /etc/nginx/sites-enabled/default**
+- > **Note:** If you see teh default Nginx webserver page then you have likely skipped this step
+- Test the configuration for any syntax errors and reload Nginx using **nginx -t && systemctl reload nginx**
+- Copy the website files from this repository to the */var/www/mywebsite.com* directory in Ubuntu
+> **Note:** There are several ways to get the files onto Ubuntu.  If using Cockpit Navigator from within Cockpit you can go to *Navigator* in the menu on the left hand side and simply drag and drop the index.html, sw.js, manifest.json, favicon.png, FiraMono-Regular.ttf, and RobotoSlab-Regular.ttf files into the window. You can also put them on to a file share and use wget to pull them over.  You can use **nano index.html** from within the 
+
 
 
 **Other license information**
