@@ -6,7 +6,7 @@ DullDull is a self-hostable replacement webpage for the ShinyShiny app which is 
 DullDull is intended to be self-hosted and was done so using the following:
 - Proxmox v9.2.2
 - LXC container of Ubuntu 26.04 LTS
-- 2C, 2GB RAM, 1Gb shared NIC
+- 2C/2GB RAM/1Gb shared NIC
 - Cockpit v360-1 for managment (not required)
 - Nginx v1.28.3
 - Nginx Proxy Manager used in a separate container for reverse proxy, HTTPS, and SSL certificate management
