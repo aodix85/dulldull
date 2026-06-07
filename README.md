@@ -1,6 +1,8 @@
 # DullDull
 DullDull is a self-hostable replacement webpage for the ShinyShiny app which is expected to be disallowed after v138/v150 of ChromeOS on Chromebooks.  It is a very simple text editor where results can be saved or printed, and nothing more.  
 
+![alt text](DullDull_screenshot.png)
+
 **Please note, this was vibe-coded with Gemini and was checked and improved with ChatGPT.  Apologies if that offends anyone.  Please fork and improve it!  If you would like to see the chat logs from Gemini or ChatGPT I should be able to provide most of them by request.**
 
 DullDull is intended to be self-hosted and was done so using the following:
@@ -68,3 +70,6 @@ TTF files can be found at [Google Fonts](https://fonts.google.com/) but if you c
 - Roboto Slab Typeface is licensed under the Apache License, Version 2.0. Copyright Google Inc.
 
 - Fira Mono Typeface is licensed under the SIL Open Font License, Version 1.1. Copyright Carrois Corporate Design & Edenspiekermann.
+
+
+[def]: file:///DullDull_screenshot.png
