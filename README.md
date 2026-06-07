@@ -59,7 +59,9 @@ From here, any changes that you need to make should be followed by the command *
 
 TTF files can be found at [Google Fonts](https://fonts.google.com/) but if you change the fonts, make sure that you have updated the index.html file accordingly.  
 
-**Other license information**
+
+
+**Other license information:**
 
 - Roboto Slab Typeface is licensed under the Apache License, Version 2.0. Copyright Google Inc.
 
