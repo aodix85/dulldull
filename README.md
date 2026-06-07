@@ -7,8 +7,8 @@ DullDull is intended to be self-hosted and was done so using the following:
 - Proxmox v9.2.2
 - LXC container of Ubuntu 26.04 LTS
 - 2C/2GB RAM/1Gb shared NIC
-- Cockpit v360-1 for managment (not required)
-- Nginx v1.28.3
+- Cockpit v360-1 for managment (optional, recommended)
+- Nginx v1.28.3 (required)
 - Nginx Proxy Manager used in a separate container for reverse proxy, HTTPS, and SSL certificate management
 
   > Within NPM, the scheme used was **http**, and the **Block Common Assets** and **Websockets support** options were turned on though these should not be required.  Regarding SSL options in NPM, a wildcard certificate was used for testing and the **Force SSL**, **HTTP/2 Support**, and **HSTS Enabled** options were turned on, though these may not be required.  HTTPS setup and SSL certificates are a subject entirely on their own and outside of the scope of this project, but HTTPS does need to be used for full functionality.
