@@ -11,11 +11,11 @@ DullDull is intended to be self-hosted and was done so using the following:
 - Nginx v1.28.3 (required)
 - Nginx Proxy Manager used in a separate container for reverse proxy, HTTPS, and SSL certificate management
 
-  > Within NPM, the scheme used was **http**, and the **Block Common Assets** and **Websockets support** options were turned on though these should not be required.  Regarding SSL options in NPM, a wildcard certificate was used for testing and the **Force SSL**, **HTTP/2 Support**, and **HSTS Enabled** options were turned on, though these may not be required.  HTTPS setup and SSL certificates are a subject entirely on their own and outside of the scope of this project, but HTTPS does need to be used for full functionality.
+  > **Note:** Within NPM, the scheme used was **http**, and the **Block Common Assets** and **Websockets support** options were turned on though these should not be required.  Regarding SSL options in NPM, a wildcard certificate was used for testing and the **Force SSL**, **HTTP/2 Support**, and **HSTS Enabled** options were turned on, though these may not be required.  HTTPS setup and SSL certificates are a subject entirely on their own and outside of the scope of this project, but HTTPS does need to be used for full functionality.
 
   > **NOTE: Service workers only run over HTTPS, so a local dev environment using HTTP is safe but production must enforce HTTPS to prevent MITM attacks, period.  If used in production this must ONLY be run over HTTPS**
 
-  > Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
+  > **Note:** Additionally, in order for all features to function as intended such as the battery level widget, this must be run over HTTPS.  Using only HTTP will result in some features failing to function properly or failing to show up at all.
 
 Because of the huge number of variations available for reverse proxies, webservers, certificate management options, etc., I will go over a super simple deployment.  This shouldn't be considered the only way or even the best way to deploy this, it is simply one way and the way that I chose to deploy it because it suits my use case and the test environment available to me.  As always, YMMV.
 
