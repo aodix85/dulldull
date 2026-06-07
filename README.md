@@ -28,7 +28,7 @@ This is a very simple static webpage and can be deployed like any other webpage 
 - Open Cockpit by going to **http://YOUR_IP_ADDRESS_HERE:9090** and login
 - You may also want to install [Cockpit Navigator](https://github.com/45Drives/cockpit-navigator) from the [45Drives](https://github.com/45Drives) repository using the instructions for Ubuntu as that will make adding files much easier
 - Create a folder for your website on Ubuntu using **mkdir -p /var/www/mywebsite.com**
-- Create and edit your custom Nginx server configuration file with **nano /etc/nginx/sites-available/mywebsite.com**
+- Create and edit your custom Nginx server configuration file with **nano /etc/nginx/sites-available/mywebsite.com** replacing mywebsite.com with your website name
 - Paste the following basic configuration, adjusting the server_name to your domain or IP address:
 > Nginx Configuration File
 > 
@@ -36,9 +36,9 @@ This is a very simple static webpage and can be deployed like any other webpage 
       listen 80;
       listen [::]:80;
 
-      server_name mywebsite.com; # Replace with your IP or Domain
+      server_name mywebsite.com 123:456:789:123; # Replacemywebsite.com with your domain and replace 123:456:789:123 with your local IP address
 
-      root /var/www/mywebsite.com;
+      root /var/www/mywebsite.com; # Replacing mywebsite.com with your website name
       index index.html;
 
       location / {
@@ -46,6 +46,7 @@ This is a very simple static webpage and can be deployed like any other webpage 
       }
     }
 
+- Enable the new site by creating a symlink to the sites-enabled directory using **ln -s /etc/nginx/sites-available/mywebsite.com /etc/nginx/sites-enabled/** replacing mywebsite.com with your website name
 
 
 **Other license information**
