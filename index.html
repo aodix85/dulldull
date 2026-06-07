@@ -6,7 +6,7 @@
     <title>Dull Dull Secure Exam Editor</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1e1e1e" id="theme-meta">
+    <meta name="theme-color" content="#f3f3f3" id="theme-meta">
 
     <meta http-equiv="Content-Security-Policy"
           content="
@@ -26,22 +26,44 @@
           ">
 
     <style>
+
+/* Register local TrueType Fonts */
+@font-face {
+    font-family: 'Fira Mono';
+    src: url('FiraMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Slab';
+    src: url('RobotoSlab-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root {
-            --bg-main: #1e1e1e;
-            --bg-bar: #252526;
-            --border-color: #3c3c3c;
-            --text-main: #d4d4d4;
-            --text-muted: #858585;
-            --btn-bg: #0e639c;
-            --btn-hover: #1177bb;
-            --control-txt: #ffffff;
-        }
-        .light-theme { 
-            --bg-main: #ffffff; --bg-bar: #f3f3f3; --border-color: #cecece; 
-            --text-main: #000000; --text-muted: #616161; 
-            --btn-bg: #007acc; --btn-hover: #0062a3; --control-txt: #333333;
-        }
+:root {
+    --bg-main: #ffffff;
+    --bg-bar: #f3f3f3;
+    --border-color: #cecece;
+    --text-main: #000000;
+    --text-muted: #616161;
+    --btn-bg: #007acc;
+    --btn-hover: #0062a3;
+    --control-txt: #333333;
+}
+
+/* Changed from .light-theme to .dark-theme */
+.dark-theme { 
+    --bg-main: #1e1e1e;
+    --bg-bar: #252526;
+    --border-color: #3c3c3c;
+    --text-main: #d4d4d4;
+    --text-muted: #858585;
+    --btn-bg: #0e639c;
+    --btn-hover: #1177bb;
+    --control-txt: #ffffff;
+}
         body, html { width: 100%; height: 100%; background-color: var(--bg-main); color: var(--text-main); font-family: 'Courier New', Courier, monospace; overflow: hidden; transition: background-color 0.15s, color 0.15s; }
         #editor-container { display: flex; flex-direction: column; width: 100%; height: 100%; position: relative; }
         #control-bar { background-color: var(--bg-bar); padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); user-select: none; }
@@ -52,11 +74,52 @@
         .btn-secondary { background-color: transparent; border: 1px solid var(--border-color); color: var(--control-txt); }
         .btn-secondary:hover { background-color: var(--border-color); }
         select { background-color: var(--bg-main); color: var(--text-main); border: 1px solid var(--border-color); padding: 5px; font-family: inherit; font-size: 13px; outline: none; border-radius: 2px; }
-        #editor { flex: 1; width: 100%; padding: 25px; border: none; resize: none; background-color: var(--bg-main); color: var(--text-main); font-family: 'Courier New', Courier, monospace; font-size: 16px; line-height: 1.6; outline: none; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word; transition: background-color 0.15s, color 0.15s; }
+        
+        #editor { flex: 1; width: 100%; padding: 25px; border: none; resize: none; background-color: var(--bg-main); color: var(--text-main); font-family: 'Roboto Slab', serif; font-size: 16px; line-height: 1.6; outline: none; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word; transition: background-color 0.15s, color 0.15s; }
         #info-overlay { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: var(--bg-bar); border: 1px solid var(--border-color); padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; min-width: 320px; }
         #info-overlay h3 { margin-bottom: 10px; color: var(--control-txt); font-size: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
         #info-overlay p { font-size: 14px; margin: 8px 0; color: var(--text-main); }
-        @media print { #control-bar { display: none !important; } #editor { color: #000000 !important; background-color: #ffffff !important; font-size: 12pt !important; overflow: visible !important; height: auto !important; } body, html { background-color: #ffffff !important; color: #000000 !important; overflow: visible !important; height: auto !important; } }
+        
+        /* Keep print container flat and completely invisible during normal computer use */
+        #print-mirror { display: none; }
+
+        /* --- THE PRINT MEDIA ENGINE STYLESHEET RE-DESIGN --- */
+        @media print {
+            /* Hide application headers, utility bars, and tool buttons */
+            #control-bar, #info-overlay, button, select, .status-text {
+                display: none !important;
+            }
+
+            body, html, #editor-container {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                overflow: visible !important;
+                height: auto !important;
+                width: auto !important;
+                position: static !important;
+            }
+
+            /* Hard-kill the textarea layout so it takes up zero space on paper */
+            #editor {
+                display: none !important;
+            }
+
+            /* Expose the printing engine block container and force fluid page-breaks */
+            #print-mirror {
+                display: block !important;
+                color: #000000 !important;
+                background-color: #ffffff !important;
+                font-family: 'Courier New', Courier, monospace !important;
+                font-size: 12pt !important;
+                line-height: 1.6 !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                position: static !important;
+                white-space: pre-wrap !important;
+                word-wrap: break-word !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -72,11 +135,13 @@
                 <option value="20px">Large Text</option>
                 <option value="24px">Extra Large</option>
             </select>
-            <select id="font-family-select" title="Font Style">
-                <option value="'Courier New', Courier, monospace" selected>Monospace</option>
-                <option value="Arial, Helvetica, sans-serif">Sans-Serif (Plain)</option>
-                <option value="'Times New Roman', Times, serif">Serif</option>
-            </select>
+<select id="font-family-select" title="Font Style">
+    <option value="'Roboto Slab', serif" selected>Roboto Slab</option>
+    <option value="'Courier New', Courier, monospace">Monospace</option>
+    <option value="'Fira Mono', monospace">Fira Mono</option>
+    <option value="Arial, Helvetica, sans-serif">Sans-Serif</option>
+    <option value="'Times New Roman', Times, serif">Serif</option>
+</select>
         </div>
         <div class="right-controls">
             <div class="status-text" id="battery-display">Battery: --</div>
@@ -85,6 +150,8 @@
     </div>
     
     <textarea id="editor" spellcheck="false" autocorrect="off" autocapitalize="none" autocomplete="off" placeholder="Begin typing your exam responses here..."></textarea>
+    
+    <div id="print-mirror"></div>
 </div>
 
 <div id="info-overlay">
@@ -96,6 +163,7 @@
 
 <script>
     const editor = document.getElementById('editor');
+    const printMirror = document.getElementById('print-mirror');
     const saveBtn = document.getElementById('save-btn');
     const printBtn = document.getElementById('print-btn');
     const themeToggle = document.getElementById('theme-toggle');
@@ -120,29 +188,41 @@
             const writable = await handle.createWritable();
             await writable.write(textContent);
             await writable.close();
-            // Data remains completely untouched inside sessionStorage here to preserve screen text
         } catch (err) {
             console.warn('Save operation cancelled or blocked:', err);
         }
     }
 
     // --- Session Resiliency Engine ---
-    // Restore text automatically if the page reloaded or crashed
     window.addEventListener('DOMContentLoaded', () => {
         const savedBackup = sessionStorage.getItem('exam_session_backup');
         if (savedBackup) {
             editor.value = savedBackup;
+            printMirror.textContent = savedBackup; // Populate mirror layout container
             updateStats();
         }
     });
 
-    // Quietly update the session memory bucket on every keystroke
+    // Handle character mapping allocations and mirrors
     function updateStatsAndBackup() {
         const text = editor.value;
         document.getElementById('char-count').textContent = text.length;
         document.getElementById('line-count').textContent = text.split('\n').length;
+        
+        // Push strings straight to session cache and the screen-printing target
         sessionStorage.setItem('exam_session_backup', text);
+        printMirror.textContent = text;
     }
+
+    // Dynamic typography adaptations for both the interactive textarea AND the print target
+    fontSizeSelect.addEventListener('change', (e) => {
+        editor.style.fontSize = e.target.value;
+        printMirror.style.fontSize = e.target.value;
+    });
+    fontFamilySelect.addEventListener('change', (e) => {
+        editor.style.fontFamily = e.target.value;
+        printMirror.style.fontFamily = e.target.value;
+    });
 
     // --- Battery Monitoring Pipeline ---
     if ('getBattery' in navigator) {
@@ -160,16 +240,15 @@
         batteryDisplay.style.display = 'none';
     }
 
-    // --- Editor Formatting Controls ---
-    fontSizeSelect.addEventListener('change', (e) => editor.style.fontSize = e.target.value);
-    fontFamilySelect.addEventListener('change', (e) => editor.style.fontFamily = e.target.value);
-
-    // --- Theme Switching ---
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        const isLight = document.body.classList.contains('light-theme');
-        themeMeta.setAttribute('content', isLight ? '#f3f3f3' : '#1e1e1e');
-    });
+// --- Theme Switching ---
+themeToggle.addEventListener('click', () => {
+    // Toggle dark-theme instead of light-theme
+    document.body.classList.toggle('dark-theme');
+    const isDark = document.body.classList.contains('dark-theme');
+    
+    // Dynamically adjust browser header bar colors
+    themeMeta.setAttribute('content', isDark ? '#1e1e1e' : '#f3f3f3');
+});
 
     // --- Print Execution ---
     printBtn.addEventListener('click', () => window.print());
@@ -178,7 +257,6 @@
     saveBtn.addEventListener('click', saveDocumentWithDialog);
     editor.addEventListener('input', updateStatsAndBackup);
 
-    // Legacy fallback stat calculation helper
     function updateStats() {
         const text = editor.value;
         document.getElementById('char-count').textContent = text.length;
