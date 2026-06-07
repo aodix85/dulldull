@@ -23,7 +23,7 @@ This is a very simple static webpage and can be deployed like any other webpage 
 
 - Create a Linux container or virtual machine or physical machine and install Ubuntu Linux
 - Once installed, update using **sudo apt update && sudo apt upgrade -y** from the terminal or by SSH'ing into the server
-- Install Cockpit and Nginx by running **sudo apt install cockpit nginx -y**
+- Install Cockpit (optional, recommended) and Nginx (required) by running **sudo apt install cockpit nginx -y**
 - Start and enable Cockpit to run on startup using **sudo systemctl start cockpit && sudo systemctl enable cockpit**
 - Open Cockpit by going to **http://YOUR_IP_ADDRESS_HERE:9090** and login
 - You may also want to install [Cockpit Navigator](https://github.com/45Drives/cockpit-navigator) from the [45Drives](https://github.com/45Drives) repository using the instructions for Ubuntu as that will make adding files much easier
